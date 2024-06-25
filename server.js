@@ -1,17 +1,43 @@
 const express = require('express');
 const app = express();
-const db = require('./db');
+const db = require('./db'); // Ensure this file exists and correctly sets up your database connection
 require('dotenv').config();
-const PORT=process.env.PORT || 3000;
-
+const PORT = process.env.PORT || 3000;
 
 const bodyParser = require('body-parser');
 const _ = require('lodash');
 app.use(bodyParser.json());
 
-app.get('/', function (req, res) {
-    res.send('Welcome to my hotel')
-})
+app.get('/', (req, res) => {
+    res.send('Welcome to my hotel');
+});
+
+const personRoutes = require('./routes/personRoutes');
+app.use('/person', personRoutes);
+
+const menuItemRoutes = require('./routes/menuRoutes');
+app.use('/menu', menuItemRoutes);
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
+
+
+
+// const express = require('express');
+// const app = express();
+// const db = require('./db');
+// require('dotenv').config();
+// const PORT=process.env.PORT || 3000;
+
+
+// const bodyParser = require('body-parser');
+// const _ = require('lodash');
+// app.use(bodyParser.json());
+
+// app.get('/', function (req, res) {
+//     res.send('Welcome to my hotel')
+// })
 
 
 
@@ -21,16 +47,16 @@ app.get('/', function (req, res) {
 
 
 
-    const personRoutes = require('./routes/personRoutes');
-    app.use('/person',personRoutes);
+//     const personRoutes = require('./routes/personRoutes');
+//     app.use('/person',personRoutes);
 
-    const menuItemRoutes = require('./routes/menuRoutes');
-    app.use('/menu', menuItemRoutes);
+//     const menuItemRoutes = require('./routes/menuRoutes');
+//     app.use('/menu', menuItemRoutes);
 
  
-app.listen(PORT, () => {
-    console.log('Server is on 3000')
-})
+// app.listen(PORT, () => {
+//     console.log('Server is on 3000')
+// })
 
 
 
